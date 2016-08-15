@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
    @user = User.find(params[:id])
    redirect_to(root_url) unless @user == current_user
 
-   if @user.update(user_params)
+    if @user.update(user_params)
       # 保存に成功した場合はトップページへリダイレクト
       redirect_to @user , notice: 'プロフィールを編集しました'
     else
