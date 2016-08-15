@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def current_user
     @user = User.find(params[:id])
     unless @user == current_user
-    redirect_to(root_url)
+      redirect_to(root_url)
     end
   end
 end
