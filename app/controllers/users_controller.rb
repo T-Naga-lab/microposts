@@ -20,13 +20,15 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
     redirect_to(root_url) unless @user == current_user
   end
 
   def update
-    @user = current_user
-    if @user.update(user_params)
+   @user = User.find(params[:id])
+   redirect_to(root_url) unless @user == current_user
+
+   if @user.update(user_params)
       # 保存に成功した場合はトップページへリダイレクト
       redirect_to @user , notice: 'プロフィールを編集しました'
     else
