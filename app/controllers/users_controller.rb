@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
   
-  def show # 追加
-   @user = User.find(params[:id])
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -20,10 +20,12 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @user = current_user
     redirect_to(root_url) unless @user == current_user
   end
 
   def update
+    @user = current_user
     if @user.update(user_params)
       # 保存に成功した場合はトップページへリダイレクト
       redirect_to @user , notice: 'プロフィールを編集しました'
@@ -36,10 +38,6 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :email, :region, :birth, :comment, :password, :password_confirmation)
-  end
-  
-  def set_user
-    @user = User.find(params[:id])
   end
   
   def correct_user
