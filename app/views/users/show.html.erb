@@ -14,7 +14,7 @@
   　　コメント：<%= @user.comment %>
 　　</h2>
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-4">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
@@ -22,5 +22,20 @@
         <%= render @microposts %>
       </ol>
     <% end %>
+  </div>
+  <div class="col-md-2">
+    <ul class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Following <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Profile", current_user %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      </ul>
+    </ul>
+  </div>
+  <div class="col-md-2">
+    Followed by
   </div>
 </div>
