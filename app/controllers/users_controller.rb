@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :correct_user, only: [:edit]
+  
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
@@ -47,12 +49,4 @@ class UsersController < ApplicationController
     redirect_to(root_url)
     end
   end
-
-#　def followings
-#　  @following = Relationships.find_by(follower_id: other_user.id)
-#　end
-　
-#　def followers
-#　  @followers = Relationships.find_by(followed_id: other_user.id)
-#　end
 end
