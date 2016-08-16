@@ -41,10 +41,18 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :region, :birth, :comment, :password, :password_confirmation)
   end
   
-  def current_user
+  def correct_user
     @user = User.find(params[:id])
     unless @user == current_user
     redirect_to(root_url)
     end
   end
+
+#　def followings
+#　  @following = Relationships.find_by(follower_id: other_user.id)
+#　end
+　
+#　def followers
+#　  @followers = Relationships.find_by(followed_id: other_user.id)
+#　end
 end
