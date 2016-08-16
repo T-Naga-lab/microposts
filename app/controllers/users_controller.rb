@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :correct_user, only: [:edit]
+  
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :region, :birth, :comment, :password, :password_confirmation)
   end
   
-  def current_user
+  def correct_user
     @user = User.find(params[:id])
     unless @user == current_user
     redirect_to(root_url)
