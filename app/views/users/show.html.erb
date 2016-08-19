@@ -6,15 +6,17 @@
         <%= @user.name %>
       </h1>
     </section>
+    <ul><%= link_to "Follower", follower_user_path(@user.id) %> <%= @user.follower_users.count %>人</ul>
+    <ul><%= link_to "Following", following_user_path(@user.id) %> <%= @user.following_users.count %>人</ul>
     <h2 class ="text-left">
-  　　出身地：<%= @user.region %>
-  　　<br>
-  　　生年月日：<%= @user.birth %>
-  　　<br>
-  　　コメント：<%= @user.comment %>
-　　</h2>
+　  　出身地：<%= @user.region %>
+　　  <br>
+  　   生年月日：<%= @user.birth %>
+  　   <br>
+　　  コメント：<%= @user.comment %>
+　  </h2>
   </aside>
-  <div class="col-md-4">
+  <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
@@ -22,20 +24,5 @@
         <%= render @microposts %>
       </ol>
     <% end %>
-  </div>
-  <div class="col-md-2">
-    <ul class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        Following <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li><%= link_to "Profile", current_user %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-      </ul>
-    </ul>
-  </div>
-  <div class="col-md-2">
-    Followed by
   </div>
 </div>
